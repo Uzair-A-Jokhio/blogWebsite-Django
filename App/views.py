@@ -6,12 +6,12 @@ from .forms import ProductForm
 
 def product_list(request):
     products = Product.objects.all()
-    return render(request, "templates/index.html", {"products" : products })
+    return render(request, "index.html", {"products" : products })
 
 
 def product_detail(request, pk):
     product = Product.objects.get(pk=pk)
-    return render(request, "templates/index2.html", {"product":product})
+    return render(request, "index2.html", {"product":product})
 
 
 def edit_product(request, pk):
@@ -22,8 +22,8 @@ def edit_product(request, pk):
             form.save()
             return redirect("product_list")
     else:
-        form = ProductForm(isinstance=Product)
-    return render(request, "templates/edit.html", {"form":form})
+        form = ProductForm(instance=product)
+    return render(request, "edit.html", {"form":form})
 
 
 def delete_product(request, pk):
@@ -32,7 +32,5 @@ def delete_product(request, pk):
     if request.method == "POST":
         product.delete()
         return redirect("product_list")
-    return render(request, "templates/delete.html", {'product':product})
+    return render(request, "delete.html", {'product':product})
 
-def home(request):
-    redirect('product_list') 
