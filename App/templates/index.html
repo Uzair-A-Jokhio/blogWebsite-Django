@@ -18,7 +18,7 @@
 				<div class="col-md-4 mb-4">
 					<div class="card">
 						<a href="{% url 'product_detail' product.pk %}">
-							<img src="{{ product.image.url }}" alt="{{ product.created_name }}" class="card-img-top">
+							<img src="{{ product.image.url }}" alt="{{ product.created_name }}" class="card-img-top" style="height: 250px;">
 						</a>
 						<div class="card-body">
 							<h5 class="card-title">{{ product.name }}</h5>
@@ -33,6 +33,11 @@
 			{% endfor %}
 		</div>
 	</div>
+
+<!-- Footer -->
+<div class="footer position-relative fixed-bottom">
+	<p class="text-center py-2 my-0">Copyright &copy; 2024 Daily Blog. All rights reserved.</p>
+</div>
 {% endblock %}
 	<!-- Add Bootstrap JS and jQuery scripts here (if needed) -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
