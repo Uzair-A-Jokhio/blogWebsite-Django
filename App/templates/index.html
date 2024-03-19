@@ -17,7 +17,7 @@
 			{% for product in products %}
 				<div class="col-md-4 mb-4">
 					<div class="card">
-						<a href="{% url 'product_detail' product.pk %}">
+						<a href="{% url 'product_detail' pk=product.pk %}">
 							<img src="{{ product.image.url }}" alt="{{ product.created_name }}" class="card-img-top" style="height: 250px;">
 						</a>
 						<div class="card-body">
@@ -33,7 +33,9 @@
 			{% endfor %}
 		</div>
 	</div>
-	<center>
+
+	<!-- ONE Method of Pagination  -->
+	<!-- <center>
         {%if products.has_previous %} {# whether the previous page exists #}
             <a href="?page={{products.previous_page_number}}"> <- </a> {# link to the prev page #}
         {% endif %}
@@ -42,11 +44,30 @@
         {%if products.has_next %} {# whether the next page exists #}
             <a href="?page={{products.next_page_number}}"> -> </a> {# link to the next page #}
         {% endif %}
-    </center>
+    </center> -->
+	<div class="Pagination">
+		<span class="step-links">
+			{% if products.has_previous %}
+				<a href="?page=1">&laquo; First </a>
+				<a href="?page={{ products.previous_page_number }}"> previous </a>
+			{% endif %}
+
+			<span class="current">
+				Page {{products.number}} of {{products.paginator.num_pages}}.
+			</span>
+			
+			{% if products.has_next %}
+				<a href="?page={{products.next_page_number}}"> next </a>
+				<a href="?page={{ products.paginator.num_pages }}"> last &raquo;</a>
+			{% endif %}
+		</span>
+	</div>
+
 {% endblock %}
 	<!-- Add Bootstrap JS and jQuery scripts here (if needed) -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 </html>

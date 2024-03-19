@@ -1,54 +1,39 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daily Blog</title>
-    <style>
-        /* Add your CSS styles here */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        .navbar {
-            background-color: #333;
-            color: #fff;
-            padding: 10px;
-            text-align: center;
-        }
-        .content {
-            padding: 20px;
-            text-align: center;
-        }
-        .footer {
-            background-color: #333;
-            color: #fff;
-            padding: 10px;
-            text-align: center;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="{% static 'stylesheet.css' %}">
 </head>
 <body>
     <!-- Top Navbar -->
-    <div class="navbar">
-        <h1>Daily Blog</h1>
+    <div class="topnav">
+        <div class="left-nav">
+            <p class="heading_nav">Daily Blog</p>
+        </div>
+        <div class="right-nav">
+            <a class="active" href="{% url 'product_list' %}">Home</a>
+            <a href="">News</a>
+            <a href="">Contact</a>
+            <a href="">About</a>
+        </div>
     </div>
-
+    
     <!-- Content Section with Django Script -->
     <div class="content">
         <!-- Add your Django script for displaying content here -->
         {% block content %}
        
         {% endblock %}
+
     </div>
 
 
-    <div class="footer position-relative fixed-bottom">
+    <!-- <div class="footer position-relative fixed-bottom">
         <p class="text-center py-2 my-0">Copyright &copy; 2024 Daily Blog. All rights reserved.</p>
-    </div>
+    </div> -->
 </body>
 </html>
