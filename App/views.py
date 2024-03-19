@@ -1,12 +1,23 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Product
 from .forms import ProductForm
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # Create your views here.
 
 def product_list(request):
     products = Product.objects.all()
-    return render(request, "index.html", {"products" : products })
+    page = Paginator(products, 6)
+    # getting the desired page number from url
+    page_number = request.GET.get('page')
+    try:
+        page_obj = page.get_page(page_number)  # returns the desired page object
+    except PageNotAnInteger:
+        # if page_number is not an integer then assign the first page
+        page_obj = page.page(1)
+    except EmptyPage:
+        page_obj = page.page(page.num_pages)
+
+    return render(request, "index.html", {"products" : page_obj })
 
 
 def product_detail(request, pk):

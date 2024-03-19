@@ -14,15 +14,12 @@
         <img src="{{ product.image.url }}" alt="{{ product.name }}" width="200">
     </div>
     <h2>{{ product.name }}</h2>
-    <p align="center">{{ product.description }}</p>
+    <div>
+        <p class="">{{ product.description }}</p>
+    </div>
     <a href="{% url 'edit_product' product.pk %}">Edit</a>
     <a href="{% url 'delete_product' product.pk %}">Delete</a> <br>
     <a href="{% url 'product_list' %}">Back to Home page</a>
-
-    <!-- Footer -->
-    <div class="footer position-absolute fixed-bottom">
-        <p class="text-center py-2 my-0">Copyright &copy; 2024 Daily Blog. All rights reserved.</p>
-    </div>
 </body>
 </html>
 {% endblock %}

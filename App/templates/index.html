@@ -33,11 +33,16 @@
 			{% endfor %}
 		</div>
 	</div>
-
-<!-- Footer -->
-<div class="footer position-relative fixed-bottom">
-	<p class="text-center py-2 my-0">Copyright &copy; 2024 Daily Blog. All rights reserved.</p>
-</div>
+	<center>
+        {%if products.has_previous %} {# whether the previous page exists #}
+            <a href="?page={{products.previous_page_number}}"> <- </a> {# link to the prev page #}
+        {% endif %}
+        <span>{{products.number}}</span> {# the current page number #}
+       
+        {%if products.has_next %} {# whether the next page exists #}
+            <a href="?page={{products.next_page_number}}"> -> </a> {# link to the next page #}
+        {% endif %}
+    </center>
 {% endblock %}
 	<!-- Add Bootstrap JS and jQuery scripts here (if needed) -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
