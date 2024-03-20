@@ -5,7 +5,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # Create your views here.
 
 def product_list(request):
-    products = Product.objects.all()
+    products = Product.objects.all().order_by('-id')  # Retrieve all products and reverse their order
     page = Paginator(products, 6)
     # getting the desired page number from url
     page_number = request.GET.get('page')

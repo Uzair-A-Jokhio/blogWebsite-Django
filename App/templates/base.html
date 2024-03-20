@@ -1,5 +1,4 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,30 +9,13 @@
 </head>
 <body>
     <!-- Top Navbar -->
-    <div class="topnav">
-        <div class="left-nav">
-            <p class="heading_nav">Daily Blog</p>
-        </div>
-        <div class="right-nav">
-            <a class="active" href="{% url 'product_list' %}">Home</a>
-            <a href="">News</a>
-            <a href="">Contact</a>
-            <a href="">About</a>
-        </div>
-    </div>
-    
+    {% include 'particals/_header.html' %}
     <!-- Content Section with Django Script -->
     <div class="content">
         <!-- Add your Django script for displaying content here -->
         {% block content %}
-       
         {% endblock %}
-
     </div>
-
-
-    <!-- <div class="footer position-relative fixed-bottom">
-        <p class="text-center py-2 my-0">Copyright &copy; 2024 Daily Blog. All rights reserved.</p>
-    </div> -->
+    {% include 'particals/_footer.html' %}
 </body>
 </html>

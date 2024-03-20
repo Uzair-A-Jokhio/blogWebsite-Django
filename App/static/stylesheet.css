@@ -5,45 +5,66 @@
     padding: 0;
 }
 
-.heading_nav {
-    color: white;
-    margin: 0; /* Remove default margin */
-}
-
-
-.topnav {
-    overflow: hidden;
-    background-color: #333;
-    display: flex; /* Use flexbox */
-    align-items: center; /* Vertically center items */
-    justify-content: space-between; /* Space out the items */
-    padding: 10px;
-}
-
-.right-nav a {
-    float: left;
+.header{
+    width: 100%;
+    height: 80px;
     display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
+    background-color: #101010;
 }
 
-.right-nav a:hover {
-    background-color: #ddd;
-    color: black;
+.inner_header{
+    width: 1000px;
+    height: 100%;
+    display: block;
+    margin: 0 auto;
+    background-color: red;
 }
 
-.right-nav .active {
-    background-color: #4CAF50;
-    color: white;
+.logo_container{
+    height:100%;
+    display: table;
+    float: left;
 }
+
+.logo_container h1{
+    color: white;
+    height: 100%;
+    display: table-cell;
+    vertical-align: middle;
+    font-family: 'Gill Sans MT';
+    font-size: 32px;
+    font-weight: 200;
+}
+
+.logo_container h1 span {
+    font-weight: 800;
+}
+
 
 
 .content {
     padding: 20px;
     text-align: center;
+}
+
+.navigation{
+    float: right;
+    height:100%;
+}
+
+.navigation a{
+    height: 100%;
+    display: table;
+    float: left;
+    padding: 0px 20px;
+}
+
+.navigation a li{
+    display: table-cell;
+    vertical-align: middle;
+    height: 100%;
+    color: white;
+    font-family: 
 }
 
 

@@ -1,15 +1,12 @@
 {% extends 'base.html' %}
-{% block content %}
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ product.name }} - Blog Details</title>
-    <link rel=""
-</head>
-<body>
+    <head>
+        <title>{{ product.name }} - Blog Details</title>
+        {% block content %}
+    </head>
+    <body>
     <div class="detail_page">
         <h1>{{ product.name }} - Blog</h1>
         <div>
@@ -19,10 +16,12 @@
         <div>
             <p class="">{{ product.description }}</p>
         </div>
-        <a href="{% url 'edit_product' product.pk %}">Edit</a>
-        <a href="{% url 'delete_product' product.pk %}">Delete</a> <br>
-        <a href="{% url 'product_list' %}">Back to Home page</a>
+        <div>
+            <a href="{% url 'edit_product' product.pk %}">Edit</a>
+            <a href="{% url 'delete_product' product.pk %}">Delete</a> <br>
+            <a href="{% url 'product_list' %}">Back to Home page</a>
+        </div>
     </div>
-    </body>
+    {% endblock %}
+</body>
 </html>
-{% endblock %}
