@@ -45,3 +45,5 @@ def delete_product(request, pk):
         return redirect("product_list")
     return render(request, "delete.html", {'product':product})
 
+def contact_page(request):
+    return render(request, 'contact.html', {})

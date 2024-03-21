@@ -1,16 +1,5 @@
 {% load static %}
 
-<!-- <div class="topnav">
-    <div class="left-nav">
-        <p class="heading_nav">Daily Blog</p>
-    </div>
-    <div class="right-nav">
-        <a class="active" href="{% url 'product_list' %}">Home</a>
-        <a href="">News</a>
-        <a href="">Contact</a>
-        <a href="">About</a>
-    </div>
-</div> -->
 
 <div class="header">
     <div class="inner_header">
@@ -20,9 +9,8 @@
         <ul class="navigation">
             <a class="active" href="{% url 'product_list' %}"><li>Home</li></a>
             <a href=""><li>News</li></a>
-            <a href=""><li>Contact</li></a>
+            <a href="{% url 'contact_page' %}"><li>Contact</li></a>
             <a href=""><li>About</li></a>
         </ul>
     </div>
-
 </div>
