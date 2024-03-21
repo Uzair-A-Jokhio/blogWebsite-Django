@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Product
-from .forms import ProductForm
+from .forms import ProductForm, ContactForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # Create your views here.
 
@@ -45,5 +45,14 @@ def delete_product(request, pk):
         return redirect("product_list")
     return render(request, "delete.html", {'product':product})
 
+
 def contact_page(request):
-    return render(request, 'contact.html', {})
+    form = ContactForm()
+
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect('contact_page')
+    context = {"form":form}
+    return render(request, 'contact.html', context)
