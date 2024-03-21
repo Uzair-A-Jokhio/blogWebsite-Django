@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.utils import timezone
 # Create your models here.
 class Product(models.Model):
     name = models.CharField(max_length=255)
@@ -23,3 +23,14 @@ class Product(models.Model):
             return " ".join(word[:30]) + "..."
         else:
             return self.description
+
+
+class Contact(models.Model):
+    full_name = models.CharField(max_length=100)
+    email = models.EmailField()
+    subject = models.CharField(max_length=50)
+    message = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) :
+        return self.subject + ' ' +self.email
