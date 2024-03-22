@@ -1,26 +1,29 @@
 {% extends 'base.html' %}
+{% block title %}
+    {{ product.name }} - Blog Details
+{% endblock %}
 
-<html lang="en">
-    <head>
-        <title>{{ product.name }} - Blog Details</title>
-        {% block content %}
-    </head>
-    <body>
-    <div class="detail_page">
-        <h1>{{ product.name }} - Blog</h1>
-        <div>
-            <img src="{{ product.image.url }}" alt="{{ product.name }}" width="200">
-        </div>
-        <h2>{{ product.name }}</h2>
-        <div>
-            <p class="">{{ product.description }}</p>
-        </div>
-        <div>
-            <a href="{% url 'edit_product' product.pk %}">Edit</a>
-            <a href="{% url 'delete_product' product.pk %}">Delete</a> <br>
-            <a href="{% url 'product_list' %}">Back to Home page</a>
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title">{{ product.name }} - Blog</h1>
+                    <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}" width="400" height="400">
+                    <div class="mt-3">
+                        <h2 class="card-subtitle mb-2">{{ product.name }}</h2>
+                        <p class="card-text">{{ product.description }}</p>
+                    </div>
+                    <div class="mt-4">
+                        <a href="{% url 'edit_product' product.pk %}" class="btn btn-primary mr-2">Edit</a>
+                        <a href="{% url 'delete_product' product.pk %}" class="btn btn-danger mr-2">Delete</a>
+                        <a href="{% url 'product_list' %}" class="btn btn-secondary">Back to Home page</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    {% endblock %}
-</body>
-</html>
+</div>
+{% endblock %}
+

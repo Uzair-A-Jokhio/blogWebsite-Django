@@ -1,17 +1,24 @@
 {% extends 'base.html' %}
-<!-- {% block title %} Contact Us {% endblock %} -->
+{% block title %} BuzzFeedle - Contact Us {% endblock %}
 
 {% block content %}
 
-<div class="contact-page  col-md-6 mx-auto">
-        <div class="form-group">
-            <form action=""  method="POST">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button class="btn btn-secondary"> Submit </button>
-            </form>
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <h1 class="card-title text-center mb-4">Contact Us</h1>
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group mb-3">
+                            {{ form.as_p }}
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-</div> 
-
+</div>
 {% endblock %}
