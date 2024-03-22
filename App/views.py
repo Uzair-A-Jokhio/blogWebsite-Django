@@ -34,7 +34,7 @@ def edit_product(request, pk):
             return redirect("product_list")
     else:
         form = ProductForm(instance=product)
-    return render(request, "edit.html", {"form":form})
+    return render(request, "edit.html", {"form":form, 'product':product})
 
 
 def delete_product(request, pk):
