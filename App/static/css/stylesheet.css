@@ -3,6 +3,7 @@
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: antiquewhite;
 }
 
 /* navigation */
@@ -79,5 +80,9 @@
 
 .content {
     padding: 20px;
+    background-color: #fdf5e6;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+
 }
 
