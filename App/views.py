@@ -56,3 +56,6 @@ def contact_page(request):
         return redirect('contact_page')
     context = {"form":form}
     return render(request, 'contact.html', context)
+
+def about_page(request):
+    return render(request, 'about_us.html',{})
