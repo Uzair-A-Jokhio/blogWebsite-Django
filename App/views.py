@@ -20,12 +20,13 @@ def product_list(request):
     return render(request, "index.html", {"products" : page_obj })
 
 
-def product_detail(request, pk):
+def product_detail(request, pk):    # show the details if individual products
     product = Product.objects.get(pk=pk)
     return render(request, "index2.html", {"product":product})
 
 
-def edit_product(request, pk):
+def edit_product(request, pk): 
+    """   """
     product = get_object_or_404(Product, pk=pk)
     if request.method == "POST":
         form = ProductForm(request.POST, instance=product)
@@ -38,6 +39,7 @@ def edit_product(request, pk):
 
 
 def delete_product(request, pk):
+    ''' The function Delete's the blog page '''
     product = get_object_or_404(Product, pk=pk)
 
     if request.method == "POST":
@@ -47,8 +49,8 @@ def delete_product(request, pk):
 
 
 def contact_page(request):
+    
     form = ContactForm()
-
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
