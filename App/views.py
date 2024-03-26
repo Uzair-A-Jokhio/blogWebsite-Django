@@ -61,3 +61,18 @@ def contact_page(request):
 
 def about_page(request):
     return render(request, 'about_us.html',{})
+
+
+def search_bar(request):
+    """ this fuction is used in search-bar,
+        -it looks for the parameter 'searched'
+     
+        then return two dict values searched and blogs   """
+
+    if request.method == "POST":
+        searched = request.POST['searched'] #looks for anything in search bar
+        blogs = Product.objects.filter(name__contains=searched)  #filter out the searched product by name
+        return render(request, 'search_thing.html', {'searched':searched, 'blogs':blogs})
+    else:
+        return render(request, 'search_thing.html', {'searched':searched})
+        

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content  %}
+
+<center>
+    {% if searched %}
+        <h1>You Search For <i>{{searched}}</i></h1>
+        <br>
+        {%if blogs%}
+            {% for blog in blogs %}
+                <a href='{% url "product_detail" blog.id %}'> {{ blog }} </a> <br>
+            {% endfor %}
+        {% else %}
+            <h2>item '{{searched}}' doesnt exists</h2>
+        {% endif %}
+    {% else %}
+        <h1>Hey! you forgot to search...</h1>
+    {% endif %}
+</center>
+
+{% endblock %}
