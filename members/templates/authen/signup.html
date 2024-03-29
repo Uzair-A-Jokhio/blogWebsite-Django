@@ -2,6 +2,7 @@
 {% block content %}
 
 <div class="">
+
     {% if messages %}
         {% for message in messages %}
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -10,15 +11,19 @@
             </div>
         {% endfor %}
     {% endif %}
-
-    <h2>Sign Up</h2>
-    <br>
-    <form method="POST">
-        {% csrf_token %}
-        {{form.as_p}}
-        <button type="submit" class="btn btn-primary">Signup</button>
-    </form>
-    <p>Already have a account <a href="{% url 'login' %}">Login</a> </p>
+    
+    <div class="col d-flex justify-content-center">
+        <div class="card shadow p-4 mb-5 bg-body rounded ">
+                <h1 class="text-center">Sign Up</h1>
+                <br>
+                <form method="POST">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <button type="submit" class="btn btn-primary">Signup</button>
+                </form>
+                <p class="text-center">Already have a account, <a href="{% url 'login' %}">Login</a> </p>
+        </div>
+    </div>
 </div>
 
 {% endblock %}
