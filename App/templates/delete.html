@@ -6,12 +6,16 @@
             <div class="card">
                 <div class="card-body">
                     <h2 class="card-title">Delete Blog Post</h2>
+                    {% if user.is_authenticated %}
                     <p class="card-text">Are you sure you want to delete "{{ product.name }}"?</p>
                     <form method="post">
                         {% csrf_token %}
                         <button type="submit" class="btn btn-danger">Yes, Delete</button>
                         <a href="{% url 'product_detail' pk=product.pk %}" class="btn btn-secondary">Cancel</a>
                     </form>
+                    {% else %}
+                    you are not allowed here! (and you know it...)
+                    {% endif %}
                 </div>
             </div>
         </div>

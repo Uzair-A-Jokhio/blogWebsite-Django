@@ -16,8 +16,10 @@
                         <p class="card-text">{{ product.description }}</p>
                     </div>
                     <div class="mt-4">
+                        {% if user.is_authenticated %}
                         <a href="{% url 'edit_product' product.pk %}" class="btn btn-primary mr-2">Edit</a>
                         <a href="{% url 'delete_product' product.pk %}" class="btn btn-danger mr-2">Delete</a>
+                        {% endif %}
                         <a href="{% url 'product_list' %}" class="btn btn-secondary">Back to Home page</a>
                     </div>
                 </div>

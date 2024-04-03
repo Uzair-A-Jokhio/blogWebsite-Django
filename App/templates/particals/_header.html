@@ -20,9 +20,7 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'contact_page' %}">Contact us</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'about_page' %}">About us </a>
-          </li>
+          
           {% if user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">logout </a>
