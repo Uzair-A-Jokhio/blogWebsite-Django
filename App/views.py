@@ -1,12 +1,19 @@
 from django.forms import BaseModelForm
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Product
+from .models import Product, Category
 from .forms import ProductForm, ContactForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 
+
+from django.views import generic
 # Create your views here.
+
+class AddCategoryview(generic.CreateView):
+    model =Category
+    template_name = 'add_category.html'
+    fields ="__all__"
 
 def product_list(request):
     products = Product.objects.all().order_by('-id')  # Retrieve all products and reverse their order

@@ -17,6 +17,7 @@
 					</div>
 					<div class="card-footer">
 						<p class="mb-0"><strong>Author:</strong> {{ product.author }}</p>
+						<p class="mb-0"><strong>Category:</strong> {{ product.category }}</p>
 						<small class="text-muted">Created at: {{ product.created_at }}</small><br>
 						<small class="text-muted">Updated at: {{ product.updated_at }}</small>
 						{% if user.is_authenticated %}

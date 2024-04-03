@@ -1,14 +1,20 @@
 from django import forms
-from .models import Product, Contact
+from .models import Product, Contact, Category
+
+choice = Category.objects.all().values_list('name','name')
+
+choice_list = [i for i in choice]
+
 
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ['name', 'description', "image"]
+        fields = ['name', 'description','category', "image"]
 
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control'}),
+            'category':forms.Select(choices=choice_list, attrs={'class': 'form-control'}),
             'image': forms.ClearableFileInput(attrs={'class': 'form-control-file'})
         }
 
