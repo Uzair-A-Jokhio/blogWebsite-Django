@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+# from .views import AddPostBlog
+
 
 urlpatterns = [
     # path('/home', views.home, name='home'),
@@ -10,4 +12,6 @@ urlpatterns = [
     path('blog/<int:pk>/delete/', views.delete_product, name='delete_product'),
     path('about/', views.about_page, name='about_page'),
     path('search/', views.search_bar, name="search_bar"),
+    # path('add_post/',AddPostBlog.as_view() , name='add_post'),
+    path('add_post/', views.post_blog, name='add_post')
 ]

@@ -48,6 +48,10 @@
           </li> -->
 
         </ul>
+
+
+        <a class="btn btn-light btn-lg active " href="{% url 'add_post' %}"><i class="bi bi-upload"> Post BLOG</i></a>
+        
         <form class="d-flex" role="search" method=POST action=" {% url 'search_bar' %}">
           {% csrf_token %}
           <input class="form-control me-2" type="search" placeholder="Search Blogs" aria-label="Search" name="searched">

@@ -1,8 +1,11 @@
+from django.forms import BaseModelForm
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Product
 from .forms import ProductForm, ContactForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 
 def product_list(request):
@@ -25,7 +28,7 @@ def product_detail(request, pk):    # show the details if individual products
     product = Product.objects.get(pk=pk)
     return render(request, "index2.html", {"product":product})
 
-@permission_required(['user'])
+
 def edit_product(request, pk): 
     """   """
     product = get_object_or_404(Product, pk=pk)
@@ -48,6 +51,18 @@ def delete_product(request, pk):
         return redirect("product_list")
     return render(request, "delete.html", {'product':product})
 
+@login_required
+def post_blog(request):
+    if request.method == "POST":
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            product = form.save(commit=False)
+            product.author = request.user
+            product.save()
+            return redirect('product_detail', pk=product.id)
+    else:
+        form = ProductForm()
+    return render(request, 'post_blog.html', {"form":form, "errors": form.errors})
 
 def contact_page(request):
     
