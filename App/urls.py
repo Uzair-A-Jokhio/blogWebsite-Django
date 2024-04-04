@@ -14,5 +14,6 @@ urlpatterns = [
     path('search/', views.search_bar, name="search_bar"),
     # path('add_post/',AddPostBlog.as_view() , name='add_post'),
     path('add_post/', views.post_blog, name='add_post'),
-    path('add_category/', AddCategoryview.as_view(),name='add_category' )
+    path('add_category/', AddCategoryview.as_view(),name='add_category' ),
+    path("category/<str:cats>/", views.cateogry_views, name='category'),
 ]

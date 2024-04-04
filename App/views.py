@@ -11,9 +11,14 @@ from django.views import generic
 # Create your views here.
 
 class AddCategoryview(generic.CreateView):
-    model =Category
+    model = Category
     template_name = 'add_category.html'
     fields ="__all__"
+
+def cateogry_views(request, cats):
+    category_list = Product.objects.filter(category=cats.replace('-', ' '))
+    return render(request, "categories.html", {"cats":cats.title().replace('-', ' '), "category_list":category_list})
+
 
 def product_list(request):
     products = Product.objects.all().order_by('-id')  # Retrieve all products and reverse their order
