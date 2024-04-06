@@ -10,9 +10,10 @@ choice_list = [i for i in choice]
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ['name', 'description','category', "image"]
+        fields = ['author','name', 'description','category', "image"]
 
         widgets = {
+            'author':forms.TextInput( attrs={'class': 'form-control', 'value':'', 'id':'user_name', 'type':'hidden'}),
             'name': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control'}),
             'category':forms.Select(choices=choice_list, attrs={'class': 'form-control'}),
