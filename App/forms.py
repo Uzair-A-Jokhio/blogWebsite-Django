@@ -1,8 +1,9 @@
 from django import forms
 from .models import Product, Contact, Category
 
-choice = Category.objects.all().values_list('name','name')
 
+# this snippet of code to get catergory fro Category model 
+choice = Category.objects.all().values_list('name','name')
 choice_list = [i for i in choice]
 
 

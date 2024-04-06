@@ -1,3 +1,4 @@
+from typing import Any
 from django.forms import BaseModelForm
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
@@ -5,7 +6,7 @@ from .models import Product, Category
 from .forms import ProductForm, ContactForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
-
+from django.views import generic
 
 from django.views import generic
 # Create your views here.
@@ -19,26 +20,43 @@ def cateogry_views(request, cats):
     category_list = Product.objects.filter(category=cats.replace('-', ' '))
     return render(request, "categories.html", {"cats":cats.title().replace('-', ' '), "category_list":category_list})
 
-
-def product_list(request):
-    products = Product.objects.all().order_by('-id')  # Retrieve all products and reverse their order
-    page = Paginator(products, 6)
-    # getting the desired page number from url
-    page_number = request.GET.get('page')
-    try:
-        page_obj = page.get_page(page_number)  # returns the desired page object
-    except PageNotAnInteger:
-        # if page_number is not an integer then assign the first page
-        page_obj = page.page(1)
-    except EmptyPage:
-        page_obj = page.page(page.num_pages)
-
-    return render(request, "index.html", {"products" : page_obj })
+def category_list_view(request):
+    cat_menu_list = Category.objects.all()
+    return render(request, 'category_list.html', {"cat_menu_list":cat_menu_list})
 
 
-def product_detail(request, pk):    # show the details if individual products
-    product = Product.objects.get(pk=pk)
-    return render(request, "index2.html", {"product":product})
+# def product_list(request):
+#     products = Product.objects.all().order_by('-id')  # Retrieve all products and reverse their order
+#     page = Paginator(products, 6)
+#     cats = Category.objects.all()
+#     # getting the desired page number from url
+#     page_number = request.GET.get('page')
+#     try:
+#         page_obj = page.get_page(page_number)  # returns the desired page object
+#     except PageNotAnInteger:
+#         # if page_number is not an integer then assign the first page
+#         page_obj = page.page(1)
+#     except EmptyPage:
+#         page_obj = page.page(page.num_pages)
+
+#     return render(request, "index.html", {"products" : page_obj, "cats":cats })
+
+class HomeView(generic.ListView):
+    model = Product
+    template_name = "index.html"
+    paginate_by = 9
+    cats = Category.objects.all()
+
+    def get_context_data(self, *args ,**kwargs):
+        cat_menu = Category.objects.all()
+        context = super(HomeView, self).get_context_data( *args ,**kwargs)
+        context["cat_menu"] = cat_menu
+        return context
+
+class ArticalDetailView(generic.DetailView):
+    model = Product
+    template_name = "index2.html"
+
 
 
 def edit_product(request, pk): 

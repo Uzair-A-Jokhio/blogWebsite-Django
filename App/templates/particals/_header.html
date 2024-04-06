@@ -20,6 +20,25 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'contact_page' %}">Contact us</a>
           </li>
+          <!-- Catergory Menu Code -->
+          {% if cat_menu %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Category
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              {% for item in cat_menu %}
+              <a class="dropdown-item" href="{% url 'category' item|slugify %}">{{item}}</a>
+              {% endfor %}
+            </div>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'category-list' %}">Category </a>
+          </li>
+
+          {% endif %}
+
           
           {% if user.is_authenticated %}
           <li class="nav-item">
@@ -39,17 +58,6 @@
             <a class="nav-link active" aria-current="page" href="{% url 'signup' %}">Signup </a>
           </li>
           {% endif  %}
-          <!-- <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li> -->
 
         </ul>
 
