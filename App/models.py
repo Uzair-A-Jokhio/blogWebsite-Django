@@ -22,10 +22,14 @@ class Product(models.Model):
     image = models.ImageField(upload_to='products/')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
+    likes = models.ManyToManyField(User, related_name="blog_post")
 
     def __str__(self):
         return self.name + ' | ' + str(self.author)
     
+    def total_likes(self):
+        return self.likes.count()
+
     def edit(self, name, description, image):
         self.name = name
         self.description = description

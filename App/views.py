@@ -1,14 +1,13 @@
 from typing import Any
 from django.forms import BaseModelForm
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Product, Category
 from .forms import ProductForm, ContactForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from django.views import generic
-
-from django.views import generic
+from django.urls import reverse
 # Create your views here.
 
 class AddCategoryview(generic.CreateView):
@@ -24,22 +23,17 @@ def category_list_view(request):
     cat_menu_list = Category.objects.all()
     return render(request, 'category_list.html', {"cat_menu_list":cat_menu_list})
 
+def LikeView(request, pk):
+    post = get_object_or_404(Product, id=request.POST.get('post_id'))
+    liked = False
+    if post.likes.filter(id=request.user.id).exists():
+        post.likes.remove(request.user)
+        liked = False
+    else:
+        post.likes.add(request.user)
+        liked = True
+    return HttpResponseRedirect(reverse('product_detail', args=[str(pk)]))
 
-# def product_list(request):
-#     products = Product.objects.all().order_by('-id')  # Retrieve all products and reverse their order
-#     page = Paginator(products, 6)
-#     cats = Category.objects.all()
-#     # getting the desired page number from url
-#     page_number = request.GET.get('page')
-#     try:
-#         page_obj = page.get_page(page_number)  # returns the desired page object
-#     except PageNotAnInteger:
-#         # if page_number is not an integer then assign the first page
-#         page_obj = page.page(1)
-#     except EmptyPage:
-#         page_obj = page.page(page.num_pages)
-
-#     return render(request, "index.html", {"products" : page_obj, "cats":cats })
 
 class HomeView(generic.ListView):
     model = Product
@@ -57,6 +51,18 @@ class ArticalDetailView(generic.DetailView):
     model = Product
     template_name = "index2.html"
 
+    def get_context_data(self, *args ,**kwargs):
+        stuff = get_object_or_404(Product, id=self.kwargs['pk'])
+        total_likes = stuff.total_likes() # function from models 
+
+        liked = False
+        if stuff.likes.filter(id=self.request.user.id).exists():
+            liked = True
+        context = super(ArticalDetailView, self).get_context_data( *args ,**kwargs)
+
+        context["total_likes"] = total_likes
+        context["liked"] = liked
+        return context
 
 
 def edit_product(request, pk): 

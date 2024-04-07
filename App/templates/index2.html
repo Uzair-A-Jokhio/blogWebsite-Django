@@ -21,8 +21,31 @@
                                 <a href="{% url 'edit_product' product.pk %}" class="btn btn-primary mr-2">Edit</a>
                                 <a href="{% url 'delete_product' product.pk %}" class="btn btn-danger mr-2">Delete</a>
                             {% endif %}
+
                         {% endif %}
                         <a href="{% url 'product_list' %}" class="btn btn-secondary">Back to Home page</a>
+                        <br/><br/>
+                        <hr>
+                        {% if user.is_authenticated %}
+                            {% if liked %}
+                                <form action="{% url 'like_post' product.pk  %}" method="POST">
+                                    {% csrf_token %}
+                                    <button type="sumbit", name="post_id", value="{{product.id}}", class="btn btn-danger btn-sm">Unlike
+                                    </button>  - {{total_likes}} likes
+                                </form>
+                            {% else %}
+                                <form action="{% url 'like_post' product.pk  %}" method="POST">
+                                    {% csrf_token %}
+                                    <button type="sumbit", name="post_id", value="{{product.id}}", class="btn btn-primary btn-sm">like
+                                    </button>  - {{total_likes}} likes
+                                </form>
+                            {% endif %}
+                        {% else %}
+                            
+                                 <small><a href="{% url 'login' %}">Login </a></small> to like - {{total_likes}} likes
+                         
+                        {% endif %} 
+                        
                     </div>
                 </div>
             </div>
