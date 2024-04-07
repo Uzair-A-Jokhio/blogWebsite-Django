@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
+from ckeditor.fields import RichTextField
 # Create your models here.
 
 class Category(models.Model):
@@ -17,7 +18,8 @@ class Category(models.Model):
 class Product(models.Model):
     author = models.ForeignKey(User ,on_delete=models.CASCADE )
     name = models.CharField(max_length=255)
-    description = models.TextField()
+    description = RichTextField(blank=True, null=True)
+    # description = models.TextField()
     category = models.CharField(max_length=255, default="uncategorized" )
     image = models.ImageField(upload_to='products/')
     created_at = models.DateTimeField(auto_now_add=True)

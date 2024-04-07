@@ -13,7 +13,7 @@
 					<div class="card-body">
 						<h5 class="card-title">{{ product.name }}</h5>
 						</a>
-						<p class="card-text">{{ product.short_description }}</p>
+						<p class="card-text">{{ product.short_description |safe }}</p>
 					</div>
 					<div class="card-footer">
 						<p class="mb-0"><strong>Author:</strong> {{ product.author }}</p>
