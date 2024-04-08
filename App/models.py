@@ -5,6 +5,21 @@ from django.urls import reverse
 from ckeditor.fields import RichTextField
 # Create your models here.
 
+class Profile(models.Model):
+    user = models.OneToOneField(User,null=True, on_delete=models.CASCADE)
+    bio = models.TextField()
+    profile_pic = models.ImageField(null=True, blank=True, upload_to="media/profile_pic")
+    facebook_url = models.URLField(max_length=255, null=True, blank=True)
+    website_url = models.URLField(max_length=255, null=True, blank=True)
+    twitter_url = models.URLField(max_length=255, null=True, blank=True)
+    instagram_url = models.URLField(max_length=255, null=True, blank=True)
+    pinterest_url = models.URLField(max_length=255, null=True, blank=True)
+    linkedin_url = models.URLField(max_length=255, null=True, blank=True)
+   
+
+    def __str__(self):
+        return str(self.user) 
+    
 class Category(models.Model):
     name =  models.CharField(max_length=255)
 
@@ -21,7 +36,7 @@ class Product(models.Model):
     description = RichTextField(blank=True, null=True)
     # description = models.TextField()
     category = models.CharField(max_length=255, default="uncategorized" )
-    image = models.ImageField(upload_to='products/')
+    image = models.ImageField( upload_to='products/')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
     likes = models.ManyToManyField(User, related_name="blog_post")
