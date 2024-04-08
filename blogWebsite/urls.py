@@ -25,6 +25,7 @@ urlpatterns = [
     path('', include("App.urls")),
     path('members/', include('django.contrib.auth.urls')),
     path('members/', include('members.urls')),
+    path('<int:uid>/', include('members.urls')), # added this for password change form 
 ]
 
 if settings.DEBUG:
