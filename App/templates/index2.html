@@ -6,17 +6,19 @@
 {% block content %}
 <div class="container">
     <div class="row justify-content-center mt-5">
-        <div class="col-lg-8">
+        <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
                     <h1 class="card-title">{{ product.name }} - blog</h1>
+                    <small>By: {{ product.author.first_name }}  {{product.author.last_name }} - {{product.created_at}}</small>
                     <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}" width="400" height="400">
                     <div class="mt-3">
                         <h2 class="card-subtitle mb-2">{{ product.name }}</h2>
                         <p class="card-text">{{ product.description|safe }}</p>
                     </div>
+
                     <div class="mt-4">
-                        {% if user.is_authenticated %}
+                        {% if user.is_authenticated %}  
                             {% if user.id == product.author.id %}
                                 <a href="{% url 'edit_product' product.pk %}" class="btn btn-primary mr-2">Edit</a>
                                 <a href="{% url 'delete_product' product.pk %}" class="btn btn-danger mr-2">Delete</a>
@@ -52,5 +54,29 @@
         </div>
     </div>
 </div>
+<br>
+<div class="card mb-3">
+    <div class="row g-0">
+      <div class="col-md-2">
+        <img src="{{product.author.profile.profile_pic.url}}" class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-md-10">
+        <div class="card-body">
+          <h5 class="card-title">
+            {{ product.author.first_name }}
+            {{ product.author.last_name }}
+        </h5>
+        <p class="small text-muted" >
+            <a href="">Website</a>
+            <a href="">| Facebook</a>
+        </p>
+        <p class="card-text">
+            {{product.author.profile.bio}}
+        </p>
+          <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}
 
