@@ -6,7 +6,7 @@ from ckeditor.fields import RichTextField
 # Create your models here.
 
 class Profile(models.Model):
-    user = models.OneToOneField(User,null=True, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     bio = models.TextField()
     profile_pic = models.ImageField(null=True, blank=True, upload_to="media/profile_pic")
     facebook_url = models.URLField(max_length=255, null=True, blank=True)
