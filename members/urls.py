@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import UserEditView, PasswordsChangeView
+from .views import UserEditView, PasswordsChangeView, ShowProfilePageView
 from django.contrib.auth import views as auth_views
 
 
@@ -10,6 +10,7 @@ urlpatterns = [
     path('signup/', views.signup_user, name='signup'),
     path('edit_profile/', UserEditView.as_view() , name='edit_profile'),
     # path('password/', auth_views.PasswordChangeView.as_view(template_name='authen/change_password.html')),
-    path('password/', PasswordsChangeView.as_view(template_name='authen/change_password.html') ),
-    path("password_success/", views.password_sucess, name='password_success')
+    path('password/', PasswordsChangeView.as_view() ),
+    path("password_success/", views.password_sucess, name='password_success'),
+    path('<int:pk>/profile/', ShowProfilePageView.as_view(), name='show_profile' ),
 ]

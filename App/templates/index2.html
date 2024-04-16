@@ -15,7 +15,7 @@
                     <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}" width="400" height="400">
                     <br><br>
                     <div class="mt-3">
-                        <h2 class="card-subtitle mb-2">{{ product.name }}</h2>
+                        <h2 class="card-subtitle mb-2"><strong>{{ product.name }}</strong></h2>
                         <hr>
                         <p class="card-text">{{ product.description|safe }}</p>
                     </div>
@@ -57,14 +57,15 @@
         </div>
     </div>
 
-<br>
+    <br>
+
     <div class="card mb-3">
         <div class="row g-0">
         <div class="col-md-2">
         {% if product.author.profile.profile_pic %}
-            <img src="{{ product.author.profile.profile_pic.url }}" class="card-img">
+            <img src="{{ product.author.profile.profile_pic.url }}" class="card-img rounded-4" width=200 height=200>
         {% else %}
-            <img src="{% static 'theApp/img/profile_default.jpg' %}" class="card-img">
+            <img src="{% static 'theApp/img/profile_default.jpg' %}" class="card-img rounded-4" width=200 height=200>
         {% endif %}
         </div>
         <div class="col-md-10">
@@ -74,13 +75,38 @@
                 {{ product.author.last_name }}
             </h5>
             <p class="small text-muted" >
-                <a href="">Website</a>
-                <a href="">| Facebook</a>
+                <a href="{% url 'show_profile' product.author.profile.id %}">Profile Page</a>
+            {% if product.author.profile.website_url %}
+                <a href="{{ product.author.profile.website_url }}">| Website</a>
+            {% endif %}
+
+            {% if  product.author.profile.facebook_url   %}
+                <a href="{{ product.author.profile.facebook_url }}">| Facebook</a>
+            {% endif  %}
+
+            {% if  product.author.profile.twitter_url   %}
+                <a href="{{ product.author.profile.twitter_url }}">| Twitter</a>
+            {% endif  %}
+
+            {% if  product.author.profile.instagram_url   %}
+                <a href="{{ product.author.profile.instagram_url }}">| Instgram </a>
+            {% endif  %}
+            
+            {% if  product.author.profile.pinterest_url   %}
+                <a href="{{ product.author.profile.pinterest_url }}">| Pinterest</a>
+            {% endif  %}
+
+            {% if  product.author.profile.linkedin_url   %}
+                <a href="{{ product.author.profile.linkedin_url }}">| Linkedin</a>
+            {% endif  %}
+
+
+
             </p>
             <p class="card-text">
                 {{product.author.profile.bio}}
             </p>
-            <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+
             </div>
         </div>
         </div>
