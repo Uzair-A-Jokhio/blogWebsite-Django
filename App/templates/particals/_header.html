@@ -44,13 +44,24 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'add_category' %}">Add Category </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link active " href="{% url 'edit_profile' %}">Edit Profile</a>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown"  aria-expanded="false">
+              Profile
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'show_profile' user.profile.id %}">Show Profile</a></li>
+              <li><a class="dropdown-item" href="{% url 'edit_profile_page' user.profile.id %}">Edit Profile</a></li>
+              <li><a class="dropdown-item" href="{% url 'edit_profile' %}">Edit Setting </a></li>
+            </ul>
           </li>
+  
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">logout </a>
           </li>
+
           {% else %}
+
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'login' %}">login </a>
           </li>

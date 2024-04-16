@@ -27,7 +27,13 @@ class ShowProfilePageView(generic.DetailView):
         context['page_user'] = page_user
         return context
        
+class EditProfilePageView(generic.UpdateView):
+    model = Profile
+    template_name = "authen/edit_user_profile.html"
+    fields = ['bio', 'profile_pic', 'website_url','facebook_url','twitter_url','instagram_url','pinterest_url','linkedin_url']
+    success_url = reverse_lazy('product_list')
 
+   
 
 
 class PasswordsChangeView(PasswordChangeView):
