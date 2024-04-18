@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+{% if user.is_authenticated %}
+    <h1>Create Profile Page... </h1>
+    <br><br>
+
+    <div class="form-group">
+        <form method="POST"  enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form.as_p}}
+            
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+    </div>
+
+
+    <script>
+        var name = "{{user.id}}";
+        document.getElementById("user_name").value = name;
+    </script>
+
+
+{% endif %}
+
+
+{% endblock %}

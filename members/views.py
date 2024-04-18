@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib import messages
-from .forms import UserSignupForm, EditProfileForm, PasswordChangingForm
+from .forms import UserSignupForm, EditProfileForm, PasswordChangingForm, CreateProfilePageForm, EditUserProfilePageForm
 from django.views import generic
 from django.urls import reverse_lazy
 from django.core.mail import send_mail
@@ -14,6 +14,15 @@ from django.template.loader import get_template
 from App.models import Profile
 # Create your views here.
 
+class CreateProfilePageView(generic.CreateView):
+    model = Profile
+    template_name = 'authen/create_user_profile_page.html'
+    form_class = CreateProfilePageForm
+
+    def form_vaild(self, form):
+        form.instance.user = self.request.user
+        return super().form_vaild(form)
+
 class ShowProfilePageView(generic.DetailView):
     model = Profile
     template_name = 'authen/user_profile.html'
@@ -21,16 +30,15 @@ class ShowProfilePageView(generic.DetailView):
     def get_context_data(self, *args, **kwargs):
         users = Profile.objects.all()
         context = super(ShowProfilePageView, self).get_context_data(*args, **kwargs)
-
         page_user = get_object_or_404(Profile, id=self.kwargs['pk'])
-
         context['page_user'] = page_user
         return context
        
 class EditProfilePageView(generic.UpdateView):
     model = Profile
     template_name = "authen/edit_user_profile.html"
-    fields = ['bio', 'profile_pic', 'website_url','facebook_url','twitter_url','instagram_url','pinterest_url','linkedin_url']
+    form_class = EditUserProfilePageForm
+    # fields = ['bio', 'profile_pic', 'website_url','facebook_url','twitter_url','instagram_url','pinterest_url','linkedin_url']
     success_url = reverse_lazy('product_list')
 
    
@@ -76,10 +84,12 @@ def logout_user(request):
 def signup_user(request):
     if request.method == "POST":
         form = UserSignupForm(request.POST)
-        if form.is_valid:
+        if form.is_valid():
             form.save()   
             messages.success(request, "Your account has been created! Now you can Login")
             return redirect('login')
+        else:
+            messages.error(request, "Oops! Something went wrong. Please correct the errors below.")
     else:
         form = UserSignupForm()
     return render(request, 'authen/signup.html', {'form':form})
